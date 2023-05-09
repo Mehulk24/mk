@@ -1,0 +1,1036 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+	.p_info {
+		width: -200px;
+	}
+
+	.infocardContainer * {
+		font-family: 'Fira Sans Condensed', sans-serif;
+		font-weight: 300;
+	}
+
+	.infocardContainer {
+		display: flex;
+		height: 200px;
+		width: 200px;
+		border-radius: 100px;
+		background: rgb(0, 159, 255);
+		background: linear-gradient(121deg, rgba(255, 255, 255, 0) 13%, rgba(0, 159, 255, 1) 100%);
+		transition: all 500ms ease-in;
+		transition-delay: 1s;
+		margin: auto;
+		margin-top: 100px;
+		--margin-top: 100px;
+	}
+
+	.infocardContainer:hover {
+		width: 500px;
+		border-radius: 100px 10px 100px 100px;
+		transition: all 1s ease-out;
+	}
+
+	.infocardContainer div {
+		text-color: white;
+		flex-shrink: 1;
+		width: 100%;
+		--background-color: green;
+	}
+
+	.infocardContainer div * {
+		display: flex;
+		--flex: inherit;
+		overflow: hidden;
+		text-overflow: hidden;
+		--background-color: yellow;
+		color: white;
+		white-space: nowrap;
+		width: 0;
+		height: auto;
+		transition: all 450ms ease-in;
+		transition-delay: 1s;
+	}
+
+	.infocardContainer:hover div * {
+		--background-color: purple;
+		display: flex;
+		visibility: visible;
+		transition: all 1s ease-out;
+		transition-delay: 500ms;
+		width: 100%;
+		height: auto;
+	}
+
+	.infocardContainer #main,
+	.infocardContainer #main img {
+		--background-color: red;
+		height: 200px;
+		width: 200px;
+		padding-right: 10px;
+		border-radius: 100%;
+		flex-shrink: 0;
+		object-fit: cover;
+	}
+
+	.infocardContainer #main img {
+		height: 180px;
+		width: 180px;
+		transition: none;
+		display: float;
+		position: relative;
+		border: 10px solid white;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+	}
+
+	.infocardContainer #textbois {
+		position: relative;
+	}
+
+	.infocardContainer #textbois #hotlinks {
+		max-width: 60%;
+		max-height: 30px;
+
+		--background-color: white;
+		position: absolute;
+		bottom: 5px;
+		display: flex;
+		justify-content: space-between;
+		border-radius: 13px;
+	}
+
+	.infocardContainer #textbois #hotlinks * {
+		background-color: white;
+		max-width: 30px;
+		--margin: 0 1px 0 1px;
+		border-radius: 25px;
+	}
+
+	/*TODO: animate copy main transition style for info*/
+	.infocardContainer #textbois #hotlinks *:hover {}
+
+	@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+	:root {
+		--c1: #2187e7;
+		--b2: #222;
+		--b3: #333;
+		--w1: #fff;
+		--w2: #eee;
+		--t1: all 0.5s ease 0s;
+	}
+
+	.content {
+		width: 68vw;
+		height: 60vh;
+		background: #fff0;
+	}
+
+	.profile-skills {
+		display: flex;
+		top: 150px;
+		position: relative;
+		width: 100%;
+		align-items: flex-start;
+	}
+
+	.profile-skills>div {
+		width: 32%;
+		margin-right: 3%;
+		border-radius: 2px;
+		position: relative;
+	}
+
+	ul.skills {
+		width: 100%;
+		position: relative;
+		padding: 25px 35px;
+		background: linear-gradient(0deg, var(--c1) 0 10px, var(--b2) 0 calc(100% - 10px), var(--c1) 0 100%);
+	}
+
+	ul.skills2 {
+		--c1: #9acd32;
+	}
+
+	ul.skills3 {
+		--c1: #ff4500;
+	}
+
+	ul.skills:before {
+		content: "Skills";
+		text-transform: uppercase;
+		position: absolute;
+		top: -75px;
+		height: 50px;
+		color: var(--w1);
+		background-color: var(--b2);
+		width: 100%;
+		left: 0;
+		padding: 15px 15px 0 0;
+		text-align: end;
+		font-weight: 600;
+		z-index: 1;
+		transition: var(--t1);
+		font-size: 50px;
+		line-height: 35px;
+		transform: scaleY(1.65);
+	}
+
+	ul.skills2:before {
+		content: "Tools";
+	}
+
+	ul.skills3:before {
+		content: "Codes";
+	}
+
+	ul.skills:after {
+		content: "";
+		position: absolute;
+		border: 40px solid #fff0;
+		border-top-color: var(--b2);
+		top: -30px;
+		left: 10px;
+		z-index: 0;
+		transition: var(--t1);
+		filter: drop-shadow(0 11px 0.1px var(--w1));
+	}
+
+	ul.skills:hover:before,
+	label:hover+ul.skills:before,
+	input:checked+label+ul.skills:before {
+		transition: var(--t1);
+		background-color: #2187e7;
+		background-position: 0 50%;
+	}
+
+	ul.skills:hover:after,
+	label:hover+ul.skills:after,
+	input:checked+label+ul.skills:after {
+		top: -20px;
+		transition: var(--t1);
+		border-top-color: #2187e7;
+	}
+
+	ul.skills2:hover:before,
+	label:hover+ul.skills2:before,
+	input:checked+label+ul.skills2:before {
+		background-color: #9acd32;
+	}
+
+	ul.skills2:hover:after,
+	label:hover+ul.skills2:after,
+	input:checked+label+ul.skills2:after {
+		border-top-color: #9acd32;
+	}
+
+	ul.skills3:hover:before,
+	label:hover+ul.skills3:before,
+	input:checked+label+ul.skills3:before {
+		background-color: #ff4500;
+	}
+
+	ul.skills3:hover:after,
+	label:hover+ul.skills3:after,
+	input:checked+label+ul.skills3:after {
+		border-top-color: #ff4500;
+	}
+
+	ul.skills li {
+		--per: 50;
+		--dur: calc(calc(var(--per) / 100) * 1.5s);
+		margin: 0 0 5px 0;
+		list-style: none;
+		padding: 20px 0;
+		position: relative;
+		text-transform: uppercase;
+		font-size: 15px;
+		color: var(--w2);
+	}
+
+	ul.skills li:before {
+		content: "";
+		position: absolute;
+		background: #1c1c1c;
+		height: 16px;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		border-radius: 2px;
+		border: 1px solid #111;
+		border-color: #111 #323232 #323232 #111;
+		--track: #2292dd40;
+		background: linear-gradient(90deg,
+				var(--track) calc(calc(var(--per) * 1%) + 4px),
+				#1c1c1c calc(calc(var(--per) * 1%) + 4px));
+	}
+
+	ul.skills2 li:before {
+		--track: #9acd3240;
+	}
+
+	ul.skills3 li:before {
+		--track: #ff450040;
+	}
+
+	ul.skills li:after {
+		content: "";
+		height: 11px;
+		margin: 0 0 2px 0;
+		background: #2187e7;
+		position: absolute;
+		box-shadow: 0px 0px 10px 1px #00c6ff66;
+		left: 3px;
+		width: 0%;
+		bottom: 0;
+		transition: all var(--dur) ease 0s;
+		animation: start 1s ease 0s 2 alternate;
+	}
+
+	ul.skills2 li:after {
+		background: #9acd32;
+		box-shadow: 0px 0px 10px 1px #9acd3299;
+	}
+
+	ul.skills3 li:after {
+		background: #ff4500;
+		box-shadow: 0px 0px 10px 1px #ff450099;
+	}
+
+	ul.skills li:hover {
+		filter: brightness(1.5);
+		transition: var(--t1);
+	}
+
+	ul.skills:hover li:after,
+	label:hover+ul.skills li:after,
+	input:checked+label+ul.skills li:after {
+		width: calc(calc(var(--per) * 1%) - 2px);
+	}
+
+	@keyframes start {
+		100% {
+			width: calc(calc(var(--per) * 1%) - 2px);
+		}
+	}
+
+	ul.skills2 li:after {
+		animation-delay: 0.5s;
+	}
+
+	ul.skills3 li:after {
+		animation-delay: 1s;
+	}
+
+	ul.skills li span {
+		font-weight: 500;
+	}
+
+	ul.skills li span:before {
+		position: absolute;
+		right: -25px;
+		top: 43px;
+		transition: var(--t1);
+		content: "";
+		opacity: 1;
+		border: 7px solid #fff0;
+	}
+
+	ul.skills li:hover span:before,
+	.profile-skills input:checked+label+ul.skills li span:before {
+		transition: var(--t1);
+		right: calc(calc(calc(100 - var(--per)) * 1%) - 12px);
+		opacity: 1;
+		border-right-color: #2187e7;
+	}
+
+	ul.skills2 li:hover span:before,
+	.profile-skills input:checked+label+ul.skills2 li span:before {
+		border-right-color: #9acd32;
+	}
+
+	ul.skills3 li:hover span:before,
+	.profile-skills input:checked+label+ul.skills3 li span:before {
+		border-right-color: #ff4500;
+	}
+
+	ul.skills li span:after {
+		position: absolute;
+		right: -40px;
+		top: 38px;
+		transition: var(--t1);
+		counter-reset: percent var(--per);
+		/*content: counter(percent) "%";*/
+		content: counter(percent);
+		color: var(--b2);
+		opacity: 1 !important;
+		padding: 4px 6px;
+		border-radius: 1px;
+		font-weight: bold;
+		pointer-events: none;
+	}
+
+	ul.skills li:hover span:after,
+	.profile-skills input:checked+label+ul.skills li span:after {
+		transition: var(--t1);
+		right: calc(calc(85 - var(--per)) * 1%);
+		right: calc(calc(calc(100 - var(--per)) * 1%) - 40px);
+		opacity: 1;
+		background: var(--c1);
+	}
+
+	ul.skills2 li:hover span:after {
+		background: #9acd32;
+	}
+
+	ul.skills3 li:hover span:after {
+		background: #ff4500;
+	}
+
+	/*********************/
+	/*** SKILLS VALUES ***/
+	/*********************/
+
+	ul.skills li.sk-ani {
+		--per: 85;
+	}
+
+	ul.skills li.sk-cms {
+		--per: 75;
+	}
+
+	ul.skills li.sk-dis {
+		--per: 90;
+	}
+
+	ul.skills li.sk-dtb {
+		--per: 65;
+	}
+
+	ul.skills li.sk-pro {
+		--per: 60;
+	}
+
+	ul.skills li.sk-res {
+		--per: 90;
+	}
+
+	ul.skills li.sk-gim {
+		--per: 90;
+	}
+
+	ul.skills li.sk-ado {
+		--per: 60;
+	}
+
+	ul.skills li.sk-not {
+		--per: 85;
+	}
+
+	ul.skills li.sk-tri {
+		--per: 70;
+	}
+
+	ul.skills li.sk-wor {
+		--per: 90;
+	}
+
+	ul.skills li.sk-tre {
+		--per: 65;
+	}
+
+	ul.skills li.sk-css {
+		--per: 95;
+	}
+
+	ul.skills li.sk-htm {
+		--per: 90;
+	}
+
+	ul.skills li.sk-jav {
+		--per: 70;
+	}
+
+	ul.skills li.sk-php {
+		--per: 80;
+	}
+
+	ul.skills li.sk-sql {
+		--per: 65;
+	}
+
+	ul.skills li.sk-pug {
+		--per: 40;
+	}
+
+	/*********************/
+	/***** TOP LABELS ****/
+	/*********************/
+
+	.profile-skills input {
+		display: none;
+	}
+
+	.profile-skills label {
+		background: var(--w1);
+		position: absolute;
+		top: -61px;
+		left: 22px;
+		z-index: 2;
+		width: 55px;
+		height: 55px;
+		border-radius: 100%;
+		cursor: pointer;
+		transition: var(--t1);
+		box-shadow: 0 0 0 0 var(--w1);
+	}
+
+	.profile-skills label:before {
+		content: "";
+		background: #fff0;
+		position: absolute;
+		top: 12px;
+		left: 11px;
+		z-index: 2;
+		border: 9px solid var(--b2);
+		border-top-width: 0;
+		border-right-width: 0;
+		transform: rotate(-45deg);
+		width: 33px;
+		height: 22px;
+		border-radius: 2px;
+		transition: var(--t1);
+	}
+
+	.profile-skills label:hover {
+		box-shadow: 0 0 0 3px var(--w1);
+		transition: var(--t1);
+	}
+
+	.profile-skills label:hover:before {
+		border-color: var(--b2);
+		transition: var(--t1);
+	}
+
+	.profile-skills input:checked+label {
+		box-shadow: 0 0 0 6px var(--w1);
+		transition: var(--t1);
+	}
+
+	.profile-skills input:checked+label:before {
+		border-color: #2187e7;
+	}
+
+	.profile-skills input#sk2:checked+label:before {
+		border-color: #9acd32;
+	}
+
+	.profile-skills input#sk3:checked+label:before {
+		border-color: #ff4500;
+	}
+
+	label[for="sk1"] {
+		/*left: -10px;*/
+	}
+
+	label[for="sk2"] {
+		/*left: calc(34% - 6px);*/
+	}
+
+
+	label[for="sk1"]:before {
+		border-color: cornflowerblue;
+	}
+
+	label[for="sk2"]:before {
+		border-color: yellowgreen;
+	}
+
+	label[for="sk3"]:before {
+		border-color: orangered;
+	}
+
+
+	/*BOTTOM LABELS */
+
+
+	ul.skills li.more {
+		padding: 0;
+		margin-bottom: 20px;
+	}
+
+	ul.skills li.more:before,
+	ul.skills li.more:after {
+		display: none;
+	}
+
+	ul.skills li.more:hover {
+		filter: none !important;
+	}
+
+	ul.skills li.more div {
+		max-height: 0;
+		transition: var(--t1);
+		overflow: hidden;
+		padding: 0;
+		width: 100%;
+	}
+
+	ul.skills li.more input:checked~div {
+		max-height: 150px;
+		transition: var(--t1);
+		padding: 20px 0 0;
+	}
+
+	ul.skills li.more div span:before,
+	ul.skills li.more div span:after {
+		display: none;
+	}
+
+	ul.skills li.more label {
+		background: linear-gradient(163deg, var(--b2) 50%, var(--w1) 50%);
+		right: 0;
+		left: inherit;
+		top: inherit;
+		bottom: -70px;
+		color: var(--b2);
+		background-size: 100% 300%;
+		background-position-y: 100%;
+		transition: var(--t1);
+		width: 55px;
+		height: 55px;
+		right: -50px;
+	}
+
+	ul.skills li.more label:before {
+		border: 0;
+		height: 100%;
+		width: 100%;
+		transform: rotate(0deg);
+		content: "+";
+		content: "\271A";
+		font-size: 45px;
+		line-height: 55px;
+		left: 0;
+		top: 0;
+		text-align: center;
+		color: var(--c1);
+	}
+
+	ul.skills li.more label:hover {
+		background-position-y: 0%;
+		color: var(--w1) !important;
+		transition: var(--t1);
+		box-shadow: 0 0 0 10px var(--w1);
+	}
+
+	ul.skills li.more span {
+		background: #1c1c1c;
+		border-radius: 1px;
+		margin: 10px 10px 1px 1px;
+		padding: 4px 8px;
+		display: inline-block;
+		border: 1px solid #111;
+		border-color: #111 #323232 #323232 #111;
+	}
+
+	ul.skills li.more span:hover {
+		color: var(--w0);
+		background: var(--c1);
+		box-shadow: 0px 0px 5px 1px var(--c1);
+		border-color: #fff2;
+	}
+
+	ul.skills li.more input:checked+label {
+		box-shadow: 0 0 0 9px var(--w1);
+		background-position-y: 0%;
+		color: var(--w0);
+		bottom: -70px;
+	}
+
+	ul.skills li.more input:checked+label:before {
+		content: "\2759";
+		transform: rotate(90deg);
+		font-weight: 600;
+	}
+
+	ul.skills li.more input:checked+label:hover {
+		box-shadow: 0 0 0 0 var(--w1);
+		background-position-y: 100%;
+		color: var(--b2) !important;
+	}
+
+	/*** MEDIA QUERIES ***/
+
+
+	@media only screen and (max-width: 1024px) {
+		.content {
+			height: 60vh;
+		}
+
+		.profile-skills {
+			flex-direction: row;
+			flex-wrap: wrap;
+			top: 20px;
+		}
+
+		.profile-skills>div {
+			width: 47% !important;
+		}
+
+		.profile-skills>div:nth-child(3) {
+			width: 98% !important;
+			margin-top: 120px;
+		}
+	}
+
+
+	/*** Mobile view disabled to get (almost) the desired thumbnail ***/
+	/*** Uncomment below code to add the media query for mobile view ***/
+
+
+	@media only screen and (max-width: 768px) {
+		.content {
+			height: 60vh;
+		}
+
+		.profile-skills {
+			flex-direction: row;
+			flex-wrap: wrap;
+			top: 20px;
+		}
+
+		.profile-skills>div {
+			width: 98% !important;
+		}
+
+		.profile-skills>div:nth-child(2),
+		.profile-skills>div:nth-child(3) {
+			margin-top: 120px;
+		}
+
+		ul.skills li:after {
+			width: calc(calc(var(--per) * 1%) - 2px);
+		}
+
+		ul.skills li span:before {
+			transition: var(--t1);
+			right: calc(calc(96.5 - var(--per)) * 1%);
+			opacity: 1;
+			border-right-color: #2187e7;
+		}
+
+		ul.skills2 li span:before {
+			border-right-color: #9acd32;
+		}
+
+		ul.skills3 li span:before {
+			border-right-color: #ff4500;
+		}
+
+		ul.skills li span:after {
+			transition: var(--t1);
+			right: calc(calc(calc(100 - var(--per)) * 1%) - 40px);
+			opacity: 1;
+			background: var(--c1);
+		}
+	}
+</style>
+<div id="home">
+	<div class="my-1 mb-4">
+		<div id="carouselExample" class="carousel slide">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="https://source.unsplash.com/random/1900x935/?hacker" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://source.unsplash.com/random/1900x935/?laptops" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://source.unsplash.com/random/1900x935/?coding" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</div>
+</div>
+
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+	<button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+		aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+		<svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+			<use href="#circle-half"></use>
+		</svg>
+		<span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+	</button>
+	<ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+				aria-pressed="false">
+				<svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+					<use href="#sun-fill"></use>
+				</svg>
+				Light
+				<svg class="bi ms-auto d-none" width="1em" height="1em">
+					<use href="#check2"></use>
+				</svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+				aria-pressed="false">
+				<svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+					<use href="#moon-stars-fill"></use>
+				</svg>
+				Dark
+				<svg class="bi ms-auto d-none" width="1em" height="1em">
+					<use href="#check2"></use>
+				</svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+				aria-pressed="true">
+				<svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+					<use href="#circle-half"></use>
+				</svg>
+				Auto
+				<svg class="bi ms-auto d-none" width="1em" height="1em">
+					<use href="#check2"></use>
+				</svg>
+			</button>
+		</li>
+	</ul>
+</div>
+
+<div id="media">
+	<header class="site-header  py-1">
+		<nav class="container d-flex flex-column flex-md-row justify-content-between">
+			<a class="py-2" href="#" aria-label="Product">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+					stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+					viewBox="0 0 24 24">
+					<title>Product</title>
+					<circle cx="12" cy="12" r="10" />
+					<path
+						d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+				</svg>
+			</a>
+			<a class="py-2 d-none d-md-inline-block" href="https://github.com/Mehulk24">Git Hub</a>
+			<a class="py-2 d-none d-md-inline-block" href="#">instagram</a>
+			<a class="py-2 d-none d-md-inline-block" href="#">Linkdin</a>
+			<a class="py-2 d-none d-md-inline-block" href="#">Pinterest</a>
+			<a class="py-2 d-none d-md-inline-block" href="#">Twitter</a>
+			<a class="py-2 d-none d-md-inline-block" href="#">Contect</a>
+		</nav>
+	</header>
+</div>
+
+<div id="about">
+	<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
+		<div class="col-md-5 p-lg-5 mx-auto my-5">
+			<h1 class="display-4 fw-normal">About</h1>
+
+			<div class="container p_info">
+				<div class="infocardContainer">
+					<div id="main">
+						<img src="static/img/mk1.jpeg"></img>
+					</div>
+					<div id="textbois">
+						<h2>Mehul Kshatriya</h2>
+						<h4>web developer</h4>
+						<a href="mailto:mehulkshatriya24@gmail.com">mehulkshatriya24@gmail.com</a>
+					</div>
+				</div>
+			</div>
+			<br><br>
+			<p class="lead fw-normal ">Right know i am study a BCA in GLS University from Ahmedabad.</p>
+		</div>
+		<div class="product-device shadow-sm d-none d-md-block"></div>
+		<div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+	</div>
+</div>
+
+<section id="services">
+	<div class="container">
+		<div class="heading text-center mb-5">
+			<h2 class="fs-3 kayden-underline-left mb-5 fw-bold text-uppercase d-inline-block">Services</h2>
+		</div>
+		<div class="section-body">
+			<div class="kayden-gradient-grid">
+				<div class="row g-0">
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="fas fa-server"></i>
+							</div>
+							<h4 class="mb-3">Development</h4>
+							<p class="text-secondary">Read and learn from others' code to discover new techniques and
+								best practices.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="fas fa-mobile-alt"></i>
+							</div>
+							<h4 class="mb-3">Responsive</h4>
+							<p class="text-secondary">Test on multiple devices, prioritize mobile, and use CSS media
+								queries for responsiveness.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="fas fa-mug-hot"></i>
+							</div>
+							<h4 class="mb-3">Design</h4>
+							<p class="text-secondary">Consider accessibility from the start.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row g-0">
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="far fa-clone"></i>
+							</div>
+							<h4 class="mb-3">User Friendly</h4>
+							<p class="text-secondary">Design software with the end user in mind for a seamless and
+								intuitive experience.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="far fa-heart"></i>
+							</div>
+							<h4 class="mb-3">Lovely</h4>
+							<p class="text-secondary">Intraction of pepole and learn some uniq.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div class="p-5">
+							<div class="fs-2 mb-3">
+								<i class="fas fa-rocket"></i>
+							</div>
+							<h4 class="mb-3">Bootstrap 5</h4>
+							<p class="text-secondary">I Use Bootstrap for Macking clear and uniq site and use multiple
+								device.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="portfolio">
+	<div class="container justify-content-center">
+		<div class="content">
+			<div class="profile-skills">
+				<div>
+					<input type="checkbox" id="sk1">
+					<label for="sk1"></label>
+					<ul class="skills skills1">
+						<li class="sk-cms"><span>Programing</span></li>
+						<li class="sk-dtb"><span>Video Editing</span></li>
+						<li class="sk-dis"><span>Photo Editing</span></li>
+						<li class="sk-pro"><span>Gamming</span></li>
+						<li class="sk-ani"><span>Animation</span></li>
+						<li class="more">
+							<input type="checkbox" id="more-con"><label for="more-con"></label>
+							<div>
+								<span>PHOTO</span><span>API</span><span>MAPS</span><span>VIDEO</span><span>CHARTS</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<input type="checkbox" id="sk2">
+					<label for="sk2"></label>
+					<ul class="skills skills2">
+						<li class="sk-gim"><span>vs code</span></li>
+						<li class="sk-ado"><span>Adobe&nbsp;CC</span></li>
+						<li class="sk-not"><span>SCAITE</span></li>
+						<li class="sk-tri"><span>PYCHAM</span></li>
+						<li class="sk-wor"><span>JOOMLA</span></li>
+						<li class="more">
+							<input type="checkbox" id="more-pro"><label for="more-pro"></label>
+							<div><span>Bootstrap</span><span>NotePad</span><span>Git
+									hub</span><span>git</span><span>aws</span></div>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<input type="checkbox" id="sk3">
+					<label for="sk3"></label>
+					<ul class="skills skills3">
+						<li class="sk-css"><span>JAVA</span></li>
+						<li class="sk-htm"><span>HTMl</span></li>
+						<li class="sk-jav"><span>C++</span></li>
+						<li class="sk-php"><span>python</span></li>
+						<li class="sk-sql"><span>mySQL</span></li>
+						<li class="more">
+							<input type="checkbox" id="more-len"><label for="more-len"></label>
+							<div><span>css</span><span>js</span><span>c</span><span>react js</span><span>DJANGO</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="contact">
+	<div class="position-relative p-3 p-md-5 m-md-3 bg-body-tertiary">
+		<div class="col-md-10 p-lg-10 mx-auto my-10">
+			<h1 class="display-4 fw-normal">Contect</h1>
+			<form class="row g-1 needs-validation" novalidate method="POST" action="/">
+				{% csrf_token %}
+				<div class="md-4">
+					<label for="validationCustom01" class="form-label">First name</label>
+					<input type="text" class="form-control" name="fname" placeholder="Enter a First Name"
+						id="validationCustom01" required>
+					<div class="valid-feedback">
+						Looks good!
+					</div>
+				</div>
+				<div class="md-4">
+					<label for="validationCustom02" class="form-label">Last name</label>
+					<input type="text" class="form-control" name="lname" placeholder="Enter a Last Name"
+						id="validationCustom02" required>
+					<div class="valid-feedback">
+						Looks good!
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlInput1" class="form-label">Email address</label>
+					<input type="email" class="form-control" name="email" id="exampleFormControlInput1"
+						placeholder="name@example.com">
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlTextarea1" class="form-label">Massage</label>
+					<textarea class="form-control" name="msg" id="exampleFormControlTextarea1"
+						placeholder="Enter a Masssage" rows="3"></textarea>
+				</div>
+				<div class="col-12">
+					<button class="btn btn-primary" type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+		<div class="product-device shadow-sm d-none d-md-block"></div>
+		<div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+	</div>
+</div>
+{% endblock body %}
