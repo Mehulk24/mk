@@ -2,9 +2,11 @@ from django.shortcuts import render, HttpResponse
 from datetime import datetime
 from MK.models import contact
 from django.contrib import messages
+import requests
 
 # Create your views here.
 def index(request):
+    respones = requests.get('https://api.unsplash.com/search/photos?page=1&query=coding&client_id=k9FUTNNsks3riwFzvex8bwIor7XoOBZbZ5oexlnAVck').json()
     messages.success(request, "Your Massage is Send .")
     if request.method == "POST":
         fname=request.POST.get('fname')
@@ -15,7 +17,7 @@ def index(request):
         contacts.save()
         messages.success(request, "Massage submited !")
         
-    return render(request,'index.html')
+    return render(request,'index.html',{'respones':respones})
 
 def about(request):
     return render(request,'about.html')
